@@ -1,0 +1,48 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          rc.runonce
+# Required-Start:    mountkernfs $local_fs
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Run /etc/rc.runonce if it exist, unless /etc/.rc.runonce exists
+### END INIT INFO
+
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+echo X > /tmp/xxx
+
+do_start() {
+	if [ -f /etc/.rc.runonce ]; then
+		return 0
+	fi
+	if [ -x /etc/rc.runonce ]; then
+	        [ "$VERBOSE" != no ] && log_begin_msg "Running runonce boot scripts (/etc/rc.runonce)"
+		/etc/rc.runonce
+		ES=$?
+		[ "$VERBOSE" != no ] && log_end_msg $ES
+		return $ES
+	fi
+}
+
+case "$1" in
+    start)
+	do_start
+        ;;
+    restart|reload|force-reload)
+        echo "Error: argument '$1' not supported" >&2
+        exit 3
+        ;;
+    stop|status)
+        # No-op
+        exit 0
+        ;;
+    *)
+        echo "Usage: $0 start|stop" >&2
+        exit 3
+        ;;
+esac

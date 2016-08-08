@@ -1,0 +1,22 @@
+#! /bin/sh
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+set_hostname() {
+    local _hostname="pi-$(cat /proc/cpuinfo | grep "^Serial" | cut -c 19-)"
+    echo $_hostname > /etc/hostname
+
+    mkdir -p /etc/salt/
+    echo $_hostname > /etc/salt/minion_id
+
+    hostname $_hostname
+}
+
+recreate_ssh_host_keys() {
+    dpkg-reconfigure openssh-server
+}
+
+set_hostname
+recreate_ssh_host_keys
+
+touch /etc/.rc.runonce
