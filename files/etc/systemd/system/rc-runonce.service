@@ -1,0 +1,15 @@
+[Unit]
+Description=/etc/rc.runonce support
+ConditionFileIsExecutable=/etc/rc.runonce
+ConditionPathExists=!/etc/.rc.runonce
+Before=multi-user.target
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.runonce
+TimeoutSec=0
+RemainAfterExit=yes
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target

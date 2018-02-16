@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
@@ -23,3 +23,5 @@ systemctl enable salt-minion
 systemctl enable ssh
 
 touch /etc/.rc.runonce
+
+reboot
