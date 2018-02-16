@@ -13,8 +13,6 @@ EOF
 
 chmod a+x /usr/sbin/policy-rc.d
 
-wget -O - https://repo.saltstack.com/apt/debian/8/armhf/latest/SALTSTACK-GPG-KEY.pub | apt-key add -
-
 apt-get -y update
 apt-get -y install salt-minion
 
