@@ -19,7 +19,6 @@ apt-get -y install salt-minion
 rm /usr/sbin/policy-rc.d
 
 systemctl enable rc.runonce
-systemctl enable salt-minion
 
 rm -f /etc/ssh/*key*
 rm -f /etc/ssh/moduli

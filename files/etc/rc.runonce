@@ -19,4 +19,7 @@ recreate_ssh_host_keys() {
 set_hostname
 recreate_ssh_host_keys
 
+systemctl enable salt-minion
+systemctl enable ssh
+
 touch /etc/.rc.runonce
