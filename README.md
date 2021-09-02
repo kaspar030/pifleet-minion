@@ -21,6 +21,11 @@ Currently it does the following:
 Download and unzip a Raspian image.
 Set up qemu-arm-static and binfmt-support.
 
-Run
+```bash
+$ sudo apt-get install -y qemu qemu-user-static binfmt-support
+```
 
-    # sudo ./setup_image.sh <Raspian image>
+Run
+```bash
+$ sudo ./setup_image.sh <Raspian image>
+```
