@@ -14,7 +14,7 @@ EOF
 chmod a+x /usr/sbin/policy-rc.d
 
 apt-get -y update
-apt-get -y install salt-minion
+apt-get -y install salt-minion busybox-static
 
 rm /usr/sbin/policy-rc.d
 
