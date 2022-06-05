@@ -20,6 +20,7 @@ rm /usr/sbin/policy-rc.d
 
 systemctl enable rc-runonce
 systemctl disable salt-minion
+systemctl disable userconfig
 
 rm -f /etc/ssh/*key*
 rm -f /etc/ssh/moduli
