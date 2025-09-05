@@ -3,7 +3,10 @@
 set -x
 
 export PATH=/usr/sbin:/sbin:/usr/bin:/bin
-export LANG=C
+
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+export LANGUAGE=C.UTF-8
 
 cat > /usr/sbin/policy-rc.d << EOF
 #!/bin/sh
@@ -12,6 +15,10 @@ exit 101
 EOF
 
 chmod a+x /usr/sbin/policy-rc.d
+
+# use official saltstack (contains newer version)
+curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | sudo tee /etc/apt/keyrings/salt-archive-keyring.pgp
+curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | sudo tee /etc/apt/sources.list.d/salt.sources
 
 apt-get -y update
 apt-get -y install salt-minion busybox-static
