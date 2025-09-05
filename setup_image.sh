@@ -16,6 +16,8 @@ IMAGE=${1}
 TMPDIR=/tmp/pifleet
 BINDMOUNT="dev sys proc dev/pts"
 
+QEMU_ARCH=aarch64
+
 trap cleanup INT QUIT TERM EXIT
 
 setup() {
@@ -32,14 +34,14 @@ setup() {
     for i in $BINDMOUNT; do mount --bind /$i $TMPDIR/$i; done
 
     # copy over arm binfmt helper
-    cp /usr/bin/qemu-arm-static $TMPDIR/usr/bin
+    cp /usr/bin/qemu-${QEMU_ARCH}-static $TMPDIR/usr/bin
 }
 
 cleanup() {
     set +e
 
     # remove binfmt helper
-    rm $TMPDIR/usr/bin/qemu-arm-static
+    rm $TMPDIR/usr/bin/qemu-${QEMU_ARCH}-static
 
     # unmount previously mounted bind mounts
     for i in $(str_reverse $BINDMOUNT); do umount $TMPDIR/$i; done
@@ -53,5 +55,5 @@ cleanup() {
 setup
 
 cp -av files/* $TMPDIR
-chroot $TMPDIR qemu-arm-static /bin/bash /bootstrap.sh
+chroot $TMPDIR qemu-${QEMU_ARCH}-static /bin/bash /bootstrap.sh
 
