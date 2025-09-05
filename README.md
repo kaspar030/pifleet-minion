@@ -20,12 +20,12 @@ Currently it does the following:
 
 Set up qemu-arm-static and binfmt-support.
 
-On Arch Linux, install "qemu-user-static" and "binfmt-qemu-static" from AUR.
+On Arch Linux, install "qemu-user-static" and "qemu-user-static-binfmt".
 
 On Debian, run this:
 
 ```bash
-sudo apt-get install -y qemu qemu-user-static binfmt-support
+sudo apt-get install -y qemu qemu-user-static binfmt-support qemu-system-arm
 ```
 
 Download and unzip a Raspian image.
